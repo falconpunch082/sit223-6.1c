@@ -55,13 +55,9 @@ pipeline {
 
     post {
         success {
-            email(
-                to: 'burnoutqueen420@gmail.com',
-                subject: "Jenkins Pipeline Notification - ${currentBuild.fullDisplayName}",
-                body: """Build status: ${currentBuild.currentResult}
-                See console output at ${env.BUILD_URL}""",
-                attachLog: true
-            )
+            mail to: "burnoutqueen420@gmail.com"
+            subject: "Build Success"
+            body: "Build was successful!"
         }
     }
 }
