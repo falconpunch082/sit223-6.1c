@@ -30,8 +30,8 @@ pipeline {
                 echo 'Using OWASP Dependency-Check for security scanning.'
                 emailext subject: "Jenkins Build - Job ${env.JOB_NAME} - Security Check",
                     body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} has gone through the security check.\n More info at: ${env.BUILD_URL}",
-                    attachLog: true
-                    to: "burnoutqueen420@gmail.com",
+                    attachLog: true,
+                    to: "burnoutqueen420@gmail.com"
             }
         }
         stage('Deploy to Staging') {
@@ -61,8 +61,8 @@ pipeline {
         always {
                 emailext subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
                     body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                    attachLog: true
-                    to: "burnoutqueen420@gmail.com",
+                    attachLog: true,
+                    to: "burnoutqueen420@gmail.com"
         }
     }
 }
