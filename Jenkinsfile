@@ -33,7 +33,6 @@ pipeline {
                 success {
                     mail subject: "Jenkins Build - Job ${env.JOB_NAME} - Security Check",
                     body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} has successfully gone through the security check.\n More info at: ${env.BUILD_URL}",
-                    attachLog: true,
                     to: "burnoutqueen420@gmail.com"
                 }
             }
@@ -65,7 +64,6 @@ pipeline {
         always {
                 mail subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
                     body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                    attachLog: true,
                     to: "burnoutqueen420@gmail.com"
         }
     }
