@@ -28,7 +28,7 @@ pipeline {
                 echo 'Performing Security Scan...'
                 // Specify security scan tool
                 echo 'Using OWASP Dependency-Check for security scanning.'
-                mail to: "burnoutqueen420@gmail.com",
+                emailext to: "burnoutqueen420@gmail.com",
                 subject: "Jenkins Build - Job ${env.JOB_NAME} - Security Check",
                 body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} has gone through the security check.\n More info at: ${env.BUILD_URL}",
                 attachLog: true
@@ -59,7 +59,7 @@ pipeline {
 
     post {
         always {
-                mail to: "burnoutqueen420@gmail.com",
+                emailext to: "burnoutqueen420@gmail.com",
                 subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
                 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
                 attachLog: true
