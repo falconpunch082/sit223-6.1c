@@ -14,8 +14,6 @@ pipeline {
                 echo 'Running Unit and Integration Tests...'
                 // Specify test automation tools
                 echo 'Using JUnit for unit tests and Selenium for integration tests.'
-                // Archive test results
-                junit '**/target/test-*.xml'
             }
         }
         stage('Code Analysis') {
@@ -34,7 +32,6 @@ pipeline {
             post {
                 success {
                     // Archive logs for the security scan
-                    archiveArtifacts artifacts: '**/security-scan.log', allowEmptyArchive: true
                     emailext subject: "Jenkins Build - Job ${env.JOB_NAME} - Security Check",
                         body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} has successfully gone through the security check.\n More info at: ${env.BUILD_URL}",
                         to: "burnoutqueen420@gmail.com",
@@ -54,8 +51,6 @@ pipeline {
                 echo 'Running Integration Tests on Staging...'
                 // Specify integration test steps
                 echo 'Using Selenium for integration tests on staging environment.'
-                // Archive integration test results
-                junit '**/target/integration-test-*.xml'
             }
         }
         stage('Deploy to Production') {
@@ -70,12 +65,10 @@ pipeline {
     post {
         always {
             // Archive the build logs and test results
-            archiveArtifacts artifacts: '**/target/*.xml, **/pipeline.log', allowEmptyArchive: true
             emailext subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
                 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
                 to: "burnoutqueen420@gmail.com",
-                attachLog: true,
-                attachmentsPattern: '**/target/*.xml'
+                attachLog: true
         }
     }
 }
