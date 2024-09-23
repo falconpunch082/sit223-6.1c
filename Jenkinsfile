@@ -67,7 +67,7 @@ pipeline {
             // Archive the build logs and test results
             emailext subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
                 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                to: "burnoutqueen420@gmail.com", from: "to: "burnoutqueen420@gmail.com",
+                to: "burnoutqueen420@gmail.com", from: "burnoutqueen420@gmail.com",
                 attachLog: true
         }
     }
